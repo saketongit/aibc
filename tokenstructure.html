@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RanchiMall Token Structure</title>
+    <style>
+        :root {
+            --primary-blue: #00128a;
+            --border-blue: #78add9;
+            --arrow-blue: #0073e6;
+            --font-main: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--primary-blue);
+            background-color: #ffffff;
+            padding: 40px 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        /* --- Sidebar Title --- */
+        .sidebar {
+            flex: 1 1 300px;
+            padding-right: 40px;
+            text-align: right;
+        }
+
+        .sidebar h1 {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            font-weight: bold;
+        }
+
+        /* --- Main Flowchart Area --- */
+        .flowchart {
+            flex: 2 1 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .node h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .node h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .address-box {
+            border: 1px solid var(--border-blue);
+            border-radius: 6px;
+            padding: 10px 15px;
+            max-width: 380px;
+            margin: 0 auto 15px auto;
+            background-color: #fbfdff;
+        }
+
+        .address-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .address-value {
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        .supply-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        .supply-info-center {
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        /* --- Arrows & Connectors --- */
+        .arrow-down-container {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .arrow-line {
+            width: 3px;
+            height: 35px;
+            background-color: var(--arrow-blue);
+            position: relative;
+        }
+
+        .arrow-head {
+            position: absolute;
+            bottom: -5px;
+            left: -4px;
+            border-width: 6px 5px 0 5px;
+            border-style: solid;
+            border-color: var(--arrow-blue) transparent transparent transparent;
+        }
+
+        /* The 3-way fork connector */
+        .desktop-fork-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stem-to-fork {
+            width: 3px;
+            height: 20px;
+            background-color: var(--arrow-blue);
+        }
+
+        .connector-fork {
+            position: relative;
+            height: 25px;
+            width: 66.66%; /* Perfectly spans from the center of column 1 to column 3 */
+            border-top: 3px solid var(--arrow-blue);
+        }
+
+        .connector-fork .line {
+            position: absolute;
+            top: 0;
+            width: 3px;
+            height: 25px;
+            background-color: var(--arrow-blue);
+        }
+
+        .connector-fork .left { left: 0; }
+        .connector-fork .center { left: 50%; transform: translateX(-50%); }
+        .connector-fork .right { right: 0; }
+
+        /* --- Level 3 Branches --- */
+        .branches {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .branch {
+            flex: 1 1 33.33%;
+            padding: 0 10px;
+        }
+
+        .branch .address-box {
+            font-size: 0.8rem;
+            padding: 8px 10px;
+        }
+
+        .branch .tokens {
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .branch p {
+            font-size: 0.9rem;
+            font-weight: bold;
+            line-height: 1.4;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        .mobile-arrow {
+            display: none;
+        }
+
+        /* --- Responsive Queries --- */
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                text-align: center;
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .branches {
+                flex-direction: column;
+                align-items: center;
+            }
+            .branch {
+                margin-bottom: 40px;
+                width: 100%;
+                max-width: 400px;
+            }
+            .desktop-fork-wrapper {
+                display: none;
+            }
+            .mobile-arrow {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar">
+            <h1>Token Structure for<br>Artificial Intelligence<br>initiatives of<br>RanchiMall</h1>
+        </div>
+
+        <div class="flowchart">
+            
+            <div class="node">
+                <h2>RanchiMall Incorporation Blockchain Contract</h2>
+                <div class="badge">Native Token: RMT</div>
+                <div class="address-box">
+                    <div class="address-label">FLO Address</div>
+                    <div class="address-value">FKNW5eCCp2SnJMJ6pLLpUCvk5hAage8Jtk</div>
+                </div>
+                <div class="supply-info">
+                    <div>Total Supply<br>21 million RMTs</div>
+                    <div>Total Released<br>100 thousand RMTs</div>
+                </div>
+            </div>
+
+            <div class="arrow-down-container">
+                <div class="arrow-line"><div class="arrow-head"></div></div>
+            </div>
+
+            <div class="node">
+                <h2>Artificial Intelligence Blockchain Contract</h2>
+                <div class="badge">Native Token: AIBC</div>
+                <div class="address-box">
+                    <div class="address-label">FLO Address</div>
+                    <div class="address-value">FCwgDB9PTXqcWtK9wYTrbXJq7XiAPbfAhSC</div>
+                </div>
+                <div class="supply-info-center">
+                    Total Supply &nbsp;&nbsp; 1 trillion AIBC
+                </div>
+            </div>
+
+            <div class="desktop-fork-wrapper">
+                <div class="stem-to-fork"></div>
+                <div class="connector-fork">
+                    <div class="line left"><div class="arrow-head"></div></div>
+                    <div class="line center"><div class="arrow-head"></div></div>
+                    <div class="line right"><div class="arrow-head"></div></div>
+                </div>
+            </div>
+
+            <div class="branches">
+                
+                <div class="branch">
+                    <div class="arrow-down-container mobile-arrow">
+                        <div class="arrow-line"><div class="arrow-head"></div></div>
+                    </div>
+                    <h3>investai#</h3>
+                    <div class="address-box">
+                        <div class="address-label">FLO Address</div>
+                        <div class="address-value">FTUCXmG8yP5cxsZXJwCkiAPtvcBTGrxCq7</div>
+                    </div>
+                    <div class="tokens">1 trillion tokens</div>
+                    <p>Tokenizing RanchiMall investments made in AI stocks</p>
+                </div>
+
+                <div class="branch">
+                    <div class="arrow-down-container mobile-arrow">
+                        <div class="arrow-line"><div class="arrow-head"></div></div>
+                    </div>
+                    <h3>openclaw#</h3>
+                    <div class="address-box">
+                        <div class="address-label">FLO Address</div>
+                        <div class="address-value">F9LGWqENphLAjTDzHaqUJpB3ZdUrfTKVFj</div>
+                    </div>
+                    <div class="tokens">1 trillion tokens</div>
+                    <p>Tokenizing OpenClaw integrated RanchiMall products</p>
+                </div>
+
+                <div class="branch">
+                    <div class="arrow-down-container mobile-arrow">
+                        <div class="arrow-line"><div class="arrow-head"></div></div>
+                    </div>
+                    <h3>projectai#</h3>
+                    <div class="address-box">
+                        <div class="address-label">FLO Address</div>
+                        <div class="address-value">FH2TuHhWugZjU1ZaWCUiDT27BK2EtU3kiR</div>
+                    </div>
+                    <div class="tokens">1 trillion tokens</div>
+                    <p>Tokenizing Non-OpenClaw AI projects of RanchiMall</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
