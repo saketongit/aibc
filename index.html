@@ -112,7 +112,7 @@
                 The concept
             </h2>
             <p>
-                RanchiMall Artificial Intelligence Blockchain Contract is the rood contract address for all AI projects under RanchiMall
+                RanchiMall Artificial Intelligence Blockchain Contract is the root contract address for all AI projects under RanchiMall
             </p>
             <p>
                 There is a total of 1 trillion aibc# token supply on FLO blockchain
@@ -124,7 +124,7 @@
                 Each of them has a fixed token supply of 1 trillion tokens
             </p>
             <p>
-                A total of 150 USDT is invested in MSon and TSMon stocks via Ondo platform that combines 100 USDT of MUon and 50 USDT of TSMon
+                A total of 150 USDT is invested in MUon and TSMon stocks via Ondo platform that combines 100 USDT of MUon and 50 USDT of TSMon
             </p>
             <a href="https://ranchimall.github.io/floscout/#/token/aibc"
                 target="_blank" class="ext-link">
@@ -492,58 +492,7 @@
             </a>
         </div>
     </main>
-    <script>
-        const roomTokenPrice = 11.5;
-        const tokensNeeded = 0;
-        function formatCurrency(amount) {
-            return amount.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 1,
-            });
-        }
-        // fetch data and return json
-        async function fetchJSON(url, options = {}) {
-            const response = await fetch(url, options)
-            const json = await response.json()
-            if (response.ok) {
-                return json
-            } else {
-                throw new Error(json.description)
-            }
-        }
-        window.onload = function () {
-            document.getElementById('banner_content').textContent = `Looking for sellers. ${tokensNeeded} tokenroom# @ ${formatCurrency(roomTokenPrice)}`;
-            if (tokensNeeded > 0)
-                document.getElementById('main_banner').classList.remove('hidden');
-            fetchJSON(`https://ranchimallflo.duckdns.org/api/v2/smartContractInfo?contractName=swap-tokenroom-usd&contractAddress=FUSBi3sQ9YFRs76wiMrDYmhqguPCXue8po`)
-                .then(info => {
-                    console.log(info)
-                    const {
-                        contractInfo: {
-                            contractType,
-                            numberOfDeposits,
-                            numberOfParticipants,
-                            oracle_address,
-                            contractSubtype,
-                            status,
-                            expiryTime,
-                            payeeAddress,
-                            acceptingToken,
-                            sellingToken,
-                            totalHonorAmount,
-                            totalParticipationAmount,
-                            price
-                        }, contractAddress,
-                        contractName
-                    } = info
-                    document.getElementById('token_price').textContent = formatCurrency(price);
-                }).catch(error => {
-                    reject(error)
-                })
-        }
-    </script>
+    <script src="./scripts/investai-price.js"></script>
 </body>
 
 </html>
