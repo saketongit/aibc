@@ -1,0 +1,102 @@
+name: Update InvestAI Prices
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+
+  workflow_dispatch:
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch prices and generate JSON
+        run: |
+          python <<EOF
+          import json
+          import requests
+
+          # ===== CONFIG =====
+
+          TOTAL_SUPPLY = 1_000_000_000_000
+
+          MUON_INVESTED = 100
+          TSMON_INVESTED = 50
+
+          # REPLACE THESE WITH REAL BUY PRICES
+          MUON_BUY_PRICE = 672.32
+          TSMON_BUY_PRICE = 392.87
+
+          NASDAQ_PE = 35
+          ADJUSTED_PE = NASDAQ_PE - 10
+
+
+          # ===== FETCH FUNCTION =====
+
+          def get_latest_price(symbol):
+              url = f"https://app.ondo.finance/api/v2/assets/{symbol}/history?range=10min"
+
+              response = requests.get(url)
+
+              data = response.json()
+
+              return data["primaryMarketPrice"][-1]["value"]
+
+
+          # ===== FETCH PRICES =====
+
+          muon_price = get_latest_price("muon")
+          tsmon_price = get_latest_price("tsmon")
+
+
+          # ===== CALCULATIONS =====
+
+          muon_units = MUON_INVESTED / MUON_BUY_PRICE
+          tsmon_units = TSMON_INVESTED / TSMON_BUY_PRICE
+
+          current_muon_value = muon_price * muon_units
+          current_tsmon_value = tsmon_price * tsmon_units
+
+          portfolio_value = current_muon_value + current_tsmon_value
+
+          invested_amount = MUON_INVESTED + TSMON_INVESTED
+
+          profit = portfolio_value - invested_amount
+
+          valuation = max(0, profit * ADJUSTED_PE)
+
+          token_price = valuation / TOTAL_SUPPLY
+
+
+          # ===== OUTPUT =====
+
+          result = {
+              "tokenPrice": token_price,
+              "portfolioValue": portfolio_value,
+              "profit": profit,
+              "valuation": valuation,
+              "muonPrice": muon_price,
+              "tsmonPrice": tsmon_price
+          }
+
+          with open("data/prices.json", "w") as f:
+              json.dump(result, f, indent=2)
+
+          print(result)
+
+          EOF
+
+      - name: Commit updated prices
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add data/prices.json
+
+          git diff --cached --quiet || git commit -m "Update investai prices"
+
+          git push
