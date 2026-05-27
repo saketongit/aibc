@@ -3,7 +3,7 @@ async function loadTokenPrice() {
     try {
 
         const response =
-            await fetch('./data/prices.json');
+            await fetch('./data/prices.json?v=' + Date.now());
 
         const data = await response.json();
 
