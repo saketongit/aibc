@@ -10,7 +10,7 @@ async function loadTokenPrice() {
         // Big valuation number
         document.querySelector('#valuation_display')
             .innerText =
-            Math.round(data.valuation);
+            data.valuation.toFixed(2) + ' USDT';
 
         // Exact token price
         document.querySelector('#token_price')
