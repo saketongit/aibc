@@ -7,9 +7,17 @@ async function loadTokenPrice() {
 
         const data = await response.json();
 
+        // Big valuation number
+        document.querySelector('#valuation_display')
+            .innerText =
+            Math.round(data.valuation);
+
+        // Exact token price
         document.querySelector('#token_price')
             .innerText =
-            data.tokenPrice.toFixed(12) + ' USD';
+            'Exact token price: ' +
+            data.tokenPrice.toFixed(12) +
+            ' USD';
 
         console.log(data);
 
