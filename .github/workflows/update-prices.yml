@@ -84,9 +84,16 @@ jobs:
               "portfolioValue": portfolio_value,
               "profit": profit,
               "valuation": valuation,
+
+
               "muonPrice": muon_price,
               "tsmonPrice": tsmon_price,
               "googlonPrice": googlon_price,
+
+
+              "currentMuonValue": current_muon_value,
+              "currentTSMonValue": current_tsmon_value,
+              "currentGOOGLonValue": current_googlon_value
           }
 
           with open("data/prices.json", "w") as f:
