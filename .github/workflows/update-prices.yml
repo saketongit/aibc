@@ -26,10 +26,12 @@ jobs:
 
           MUON_INVESTED = 100
           TSMON_INVESTED = 50
+          GOOGLON_INVESTED = 50
 
           # REPLACE THESE WITH REAL BUY PRICES
           MUON_BUY_PRICE = 672.32
           TSMON_BUY_PRICE = 392.87
+          GOOGLON_BUY_PRICE = 374.30
 
           NASDAQ_PE = 35
           ADJUSTED_PE = NASDAQ_PE - 10
@@ -51,19 +53,22 @@ jobs:
 
           muon_price = get_latest_price("muon")
           tsmon_price = get_latest_price("tsmon")
+          googlon_price = get_latest_price("googlon")
 
 
           # ===== CALCULATIONS =====
 
           muon_units = MUON_INVESTED / MUON_BUY_PRICE
           tsmon_units = TSMON_INVESTED / TSMON_BUY_PRICE
+          googlon_units = GOOGLON_INVESTED / GOOGLON_BUY_PRICE
 
           current_muon_value = muon_price * muon_units
           current_tsmon_value = tsmon_price * tsmon_units
+          current_googlon_value = googlon_price * googlon_units
 
-          portfolio_value = current_muon_value + current_tsmon_value
+          portfolio_value = current_muon_value + current_tsmon_value + current_googlon_value
 
-          invested_amount = MUON_INVESTED + TSMON_INVESTED
+          invested_amount = MUON_INVESTED + TSMON_INVESTED + GOOGLON_INVESTED
 
           profit = portfolio_value - invested_amount
 
@@ -80,7 +85,8 @@ jobs:
               "profit": profit,
               "valuation": valuation,
               "muonPrice": muon_price,
-              "tsmonPrice": tsmon_price
+              "tsmonPrice": tsmon_price,
+              "googlonPrice": goglon_price,
           }
 
           with open("data/prices.json", "w") as f:
