@@ -339,22 +339,18 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-
 table th {
   padding-bottom: 1rem;
   text-align: left;
 }
-
 table th:not(:last-of-type),
 table td:not(:last-of-type) {
   padding-right: 1rem;
 }
-
 table td {
   padding-bottom: 0.8rem;
   font-size: 0.9rem;
 }
-
 table th:last-of-type,
 table td:last-of-type {
   text-align: right;
@@ -395,6 +391,9 @@ table td:last-of-type {
 .contribution-value {
   color: rgba(var(--text-color), 0.8);
 }
+
 .hidden {
   display: none;
 }
+
+/*# sourceMappingURL=main.css.map */
