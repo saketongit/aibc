@@ -33,6 +33,21 @@ async function loadTokenPrice() {
             .innerText =
             data.currentGOOGLonValue.toFixed(2);    
 
+        // ===== Contribution Breakdown =====
+
+        document.querySelector('#investai_contribution')
+            .innerText =
+            data.valuation.toFixed(2) + ' USDT';
+
+        document.querySelector('#openclaw_contribution')
+            .innerText =
+            '0.00 USDT';
+
+        document.querySelector('#projectai_contribution')
+            .innerText =
+            '0.00 USDT';
+
+
         console.log(data);
 
     } catch(error) {
