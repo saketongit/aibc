@@ -102,6 +102,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }
 #main_banner {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   justify-content: center;
@@ -311,25 +312,28 @@ sm-copy {
   }
 }
 table {
+  width: 100%;
+  border-collapse: collapse;
+
   th {
-    &:first-of-type {
-      text-align: start;
-    }
-    &:not(:last-of-type) {
-      padding-right: 1rem;
-    }
     padding-bottom: 1rem;
+    text-align: left;
   }
+
+  th:not(:last-of-type),
+  td:not(:last-of-type) {
+    padding-right: 1rem;
+  }
+
   td {
     padding-bottom: 0.8rem;
     font-size: 0.9rem;
-    &:not(:last-of-type) {
-      padding-right: 1rem;
-    }
-    &:last-of-type {
-      display: flex;
-      justify-content: flex-end;
-    }
+  }
+
+  th:last-of-type,
+  td:last-of-type {
+    text-align: right;
+    width: 140px;
   }
 }
 
@@ -340,6 +344,33 @@ table {
   sm-copy {
     min-width: 24rem;
   }
+}
+
+#contribution_card {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.contribution-grid {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.contribution-item {
+  text-align: center;
+  min-width: 150px;
+}
+
+.contribution-name {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.contribution-value {
+  color: rgba(var(--text-color), 0.8);
 }
 
 .hidden {
